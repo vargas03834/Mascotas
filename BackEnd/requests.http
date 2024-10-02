@@ -1,0 +1,11 @@
+GET http://127.0.0.1:4000/mascotas/buscar HTTP/1.1
+
+
+###
+POST http://127.0.0.1:4000/mascotas/crear HTTP/1.1
+
+###
+PUT http://127.0.0.1:4000/mascotas/actualizar/2 HTTP/1.1
+
+###
+DELETE http://127.0.0.1:4000/mascotas/eliminar/2 HTTP/1.1
