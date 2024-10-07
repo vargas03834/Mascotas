@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-sm-12">
+        <form (ngSubmit)="onSubmit()" #adoptanteForm="ngForm">
+            <!-- Campo para el nombre del adoptante -->
+            <fieldset class="form-group">
+                <div class="col-sm-12">
+                    <label for="adoptante_nombre">Nombre del Adoptante</label>
+                    <input type="text" id="adoptante_nombre" class="form-control" required 
+                           [(ngModel)]="adoptante.adoptante_nombre" name="adoptante_nombre" 
+                           placeholder="Ingrese el nombre del adoptante" />
+                </div>
+            </fieldset>
+
+            <!-- Campo para el email del adoptante -->
+            <fieldset class="form-group">
+                <div class="col-sm-12">
+                    <label for="adoptante_email">Email del Adoptante</label>
+                    <input type="email" id="adoptante_email" class="form-control" required 
+                           [(ngModel)]="adoptante.adoptante_email" name="adoptante_email" 
+                           placeholder="Ingrese el email del adoptante" />
+                </div>
+            </fieldset>
+
+            <!-- Campo para el teléfono del adoptante -->
+            <fieldset class="form-group">
+                <div class="col-sm-12">
+                    <label for="adoptante_telefono">Teléfono del Adoptante</label>
+                    <input type="tel" id="adoptante_telefono" class="form-control" 
+                           [(ngModel)]="adoptante.adoptante_telefono" name="adoptante_telefono" 
+                           placeholder="Ingrese el número de teléfono (opcional)" />
+                </div>
+            </fieldset>
+
+            <!-- Campo para la dirección del adoptante -->
+            <fieldset class="form-group">
+                <div class="col-sm-12">
+                    <label for="adoptante_direccion">Dirección del Adoptante</label>
+                    <input type="text" id="adoptante_direccion" class="form-control" 
+                           [(ngModel)]="adoptante.adoptante_direccion" name="adoptante_direccion" 
+                           placeholder="Ingrese la dirección (opcional)" />
+                </div>
+            </fieldset>
+
+            <!-- Botones de enviar y cancelar -->
+            <fieldset class="form-group">
+                <div class="col-sm-12 text-center">
+                    <button type="submit" class="btn btn-primary" [disabled]="!adoptanteForm.form.valid">Guardar</button>
+                    <button type="button" class="btn btn-secondary" [routerLink]="['/adoptantes']">Cancelar</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

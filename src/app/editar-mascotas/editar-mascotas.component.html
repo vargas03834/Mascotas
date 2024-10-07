@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="col-sm-12">
+    <form (ngSubmit)="onSubmit()" #mascotaForm="ngForm">
+      <fieldset class="form-group">
+        <div class="col-sm-12">
+          <label class="control-label" for="nombre">Nombre</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            required 
+            [(ngModel)]="mascota.mascota_nombre" 
+            name="nombre" 
+            placeholder="Ingrese el nombre de la mascota">
+        </div>
+      </fieldset>
+      
+      <fieldset class="form-group">
+        <div class="col-sm-12">
+          <label class="control-label" for="edad">Edad</label>
+          <input 
+            type="number" 
+            class="form-control" 
+            required 
+            [(ngModel)]="mascota.mascota_edad" 
+            name="edad" 
+            placeholder="Ingrese la edad de la mascota">
+        </div>
+      </fieldset>
+      
+      <fieldset class="form-group">
+        <div class="col-sm-12">
+          <label class="control-label" for="tipo">Tipo</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            [(ngModel)]="mascota.mascota_tipo" 
+            name="tipo" 
+            placeholder="Ingrese el tipo de mascota (perro, gato, etc.)">
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <div class="col-sm-12">
+          <label class="control-label" for="raza">Raza</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            [(ngModel)]="mascota.mascota_raza" 
+            name="raza" 
+            placeholder="Ingrese la raza de la mascota">
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <div class="col-sm-12">
+          <label class="control-label" for="estado">Estado</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            [(ngModel)]="mascota.mascota_estado" 
+            name="estado" 
+            placeholder="Ingrese el estado de la mascota">
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <div class="col-sm-12">
+          <label class="control-label" for="foto">Foto (URL)</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            [(ngModel)]="mascota.mascota_imagen" 
+            name="foto" 
+            placeholder="Ingrese la URL de la foto de la mascota">
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button 
+            type="submit" 
+            class="btn btn-primary" 
+            [disabled]="!mascotaForm.form.valid">
+            {{ mascota.mascota_id ? 'Actualizar' : 'Agregar' }}
+          </button>
+        </div>
+      </fieldset>
+    </form>
+    <div class="text-right">
+      <a class="btn btn-secondary" [routerLink]="['/mascotas']">Regresar</a>
+    </div>
+  </div>
+</div>
+

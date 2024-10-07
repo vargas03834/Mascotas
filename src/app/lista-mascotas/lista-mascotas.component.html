@@ -1,0 +1,176 @@
+<div class="container-fluid">
+  <div class="row">
+    <!-- Menú lateral -->
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <h5 class="sidebar-heading">Menú</h5>
+
+        <!-- Sección de Mascotas -->
+        <h6 class="sidebar-heading">Mascotas</h6>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" (click)="mostrarListaMascotas()">
+              <i class="fas fa-paw"></i> Lista de Mascotas
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="mostrarFormularioMascota()">
+              <i class="fas fa-plus-circle"></i> Nueva Mascota
+            </a>
+          </li>
+        </ul>
+
+        <hr>
+
+        <!-- Sección de Adoptantes -->
+        <h6 class="sidebar-heading">Adoptantes</h6>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/adoptantes']">
+              <i class="fas fa-users"></i> Lista de Adoptantes
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/adoptantes/agregar']">
+              <i class="fas fa-user-plus"></i> Agregar Adoptante
+            </a>
+          </li>
+        </ul>
+
+        <hr>
+
+        <!-- Sección de Solicitudes -->
+        <h6 class="sidebar-heading">Solicitudes</h6>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/solicitudes']">
+              <i class="fas fa-file-alt"></i> Lista de Solicitudes
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/solicitudes/agregar']">
+              <i class="fas fa-plus-circle"></i> Agregar Solicitud
+            </a>
+          </li>
+        </ul>
+
+        <hr>
+
+        <!-- Botón de Inicio -->
+        <div class="text-center mt-3">
+          <a class="btn btn-primary" (click)="mostrarInicio()">
+            <i class="fas fa-home"></i> Inicio
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <h1 class="text-center my-4">Adopta una Mascota</h1>
+
+      <div *ngIf="mostrarBienvenida" class="text-center">
+        <h2>Bienvenido a la Plataforma de Adopción de Mascotas</h2>
+      </div>
+
+      <!-- Formulario para agregar nueva mascota -->
+      <div *ngIf="mostrarFormulario" class="my-4">
+        <h3 class="text-center">Agregar Nueva Mascota</h3>
+        <form (ngSubmit)="agregarMascota()">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" class="form-control" [(ngModel)]="nuevaMascota.mascota_nombre" name="nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="edad">Edad</label>
+            <input type="number" id="edad" class="form-control" [(ngModel)]="nuevaMascota.mascota_edad" name="edad" required>
+          </div>
+          <div class="form-group">
+            <label for="tipo">Tipo</label>
+            <select id="tipo" class="form-control" [(ngModel)]="nuevaMascota.mascota_tipo" name="tipo" required>
+              <option value="">Seleccione Tipo</option>
+              <option value="perro">Perro</option>
+              <option value="gato">Gato</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="raza">Raza</label>
+            <input type="text" id="raza" class="form-control" [(ngModel)]="nuevaMascota.mascota_raza" name="raza" required>
+          </div>
+          <div class="form-group">
+            <label for="estado">Estado</label>
+            <input type="text" id="estado" class="form-control" [(ngModel)]="nuevaMascota.mascota_estado" name="estado" required>
+          </div>
+          <div class="form-group">
+            <label for="foto">Foto URL</label>
+            <input type="text" id="foto" class="form-control" [(ngModel)]="nuevaMascota.mascota_imagen" name="foto">
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Agregar Mascota</button>
+            <button type="button" class="btn btn-secondary" (click)="cancelarAgregar()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Lista de Mascotas -->
+      <div *ngIf="!mostrarFormulario && !mostrarBienvenida">
+        <h3 class="text-center">Lista de Mascotas</h3>
+        <div class="form-inline mb-3">
+          <input type="text" [(ngModel)]="nombreBusqueda" (input)="buscarMascotas()" placeholder="Buscar por nombre" class="form-control mb-2 mr-sm-2" />
+          <select [(ngModel)]="tipoBusqueda" (change)="buscarMascotas()" class="form-control mb-2">
+            <option value="">Seleccionar tipo</option>
+            <option value="perro">Perro</option>
+            <option value="gato">Gato</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+
+        <table class="table table-striped text-center">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Edad</th>
+              <th>Tipo</th>
+              <th>Raza</th>
+              <th>Estado</th>
+              <th>Foto</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let mascota of mascotas">
+              <td>{{ mascota.mascota_id }}</td>
+              <td>{{ mascota.mascota_nombre }}</td>
+              <td>{{ mascota.mascota_edad }}</td>
+              <td>{{ mascota.mascota_tipo }}</td>
+              <td>{{ mascota.mascota_raza }}</td>
+              <td>{{ mascota.mascota_estado }}</td>
+              <td>
+                <img *ngIf="mascota.mascota_imagen" [src]="mascota.mascota_imagen" alt="Foto de {{ mascota.mascota_nombre }}" class="img-thumbnail" style="max-width: 250px;">
+              </td>
+              <td>
+                <a class="btn btn-info" [routerLink]="['/mascotas/editar/', mascota.mascota_id]">Editar</a>
+                <button class="btn btn-danger" (click)="borrarMascota(mascota.mascota_id)">Borrar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center">
+            <li class="page-item" [class.disabled]="paginaActual === 1">
+              <a class="page-link" (click)="cambiarPagina(paginaActual - 1)">Anterior</a>
+            </li>
+            <li class="page-item" *ngFor="let page of [].constructor(totalPaginas); let i = index" [class.active]="paginaActual === (i + 1)">
+              <a class="page-link" (click)="cambiarPagina(i + 1)">{{ i + 1 }}</a>
+            </li>
+            <li class="page-item" [class.disabled]="paginaActual === totalPaginas">
+              <a class="page-link" (click)="cambiarPagina(paginaActual + 1)">Siguiente</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </main>
+  </div>
+</div>

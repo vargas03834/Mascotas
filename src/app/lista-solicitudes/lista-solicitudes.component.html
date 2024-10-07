@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <form class="form-inline mb-3">
+          <fieldset class="form-group col-sm-11">
+            <input 
+            type="text" 
+            [(ngModel)]="nombreBusqueda" 
+            (input)="buscarSolicitudes()" 
+            name="nombreBusqueda"
+            placeholder="Buscar por nombre" 
+            class="form-control" 
+            />
+          </fieldset>
+        </form>
+        <table class="table table-striped text-center">
+          <thead>
+            <tr>
+              <th>ID Solicitud</th>
+              <th>ID Mascota</th>
+              <th>ID Adoptante</th>
+              <th>Fecha de Solicitud</th>
+              <th>Estado de Solicitud</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let solicitud of solicitudes">
+              <td>{{ solicitud.solicitud_id }}</td>
+              <td>{{ solicitud.mascota_id }}</td>
+              <td>{{ solicitud.adoptante_id }}</td>
+              <td>{{ solicitud.solicitud_fecha }}</td>
+              <td>{{ solicitud.solicitud_estado }}</td>
+              <td>
+                <a class="btn btn-info" [routerLink]="['/solicitudes/editar/', solicitud.solicitud_id]">Editar</a>
+                <button class="btn btn-danger" (click)="borrarSolicitud(solicitud.solicitud_id)">Borrar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div class="text-right">
+          <a class="btn btn-secondary" [routerLink]="['/mascotas']">Regresar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  

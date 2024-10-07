@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-sm-12">
+        <form (ngSubmit)="onSubmit()" #solicitudForm="ngForm">
+            <!-- Campo para el ID de la mascota -->
+            <fieldset class="form-group">
+                <div class="col-sm-12">
+                    <label for="mascota_id">ID de la Mascota</label>
+                    <input type="text" id="mascota_id" class="form-control" required 
+                           [(ngModel)]="solicitud.mascota_id" name="mascota_id" 
+                           placeholder="Ingrese el ID de la mascota" />
+                </div>
+            </fieldset>
+
+            <!-- Campo para el ID del adoptante -->
+            <fieldset class="form-group">
+                <div class="col-sm-12">
+                    <label for="adoptante_id">ID del Adoptante</label>
+                    <input type="text" id="adoptante_id" class="form-control" required 
+                           [(ngModel)]="solicitud.adoptante_id" name="adoptante_id" 
+                           placeholder="Ingrese el ID del adoptante" />
+                </div>
+            </fieldset>
+
+            <!-- Campo para la fecha de la solicitud -->
+            <fieldset class="form-group">
+                <div class="col-sm-12">
+                    <label for="solicitud_fecha">Fecha de la Solicitud</label>
+                    <input type="date" id="solicitud_fecha" class="form-control" required 
+                           [(ngModel)]="solicitud.solicitud_fecha" name="solicitud_fecha" />
+                </div>
+            </fieldset>
+
+            <!-- Campo para el estado de la solicitud -->
+            <fieldset class="form-group">
+                <div class="col-sm-12">
+                    <label for="solicitud_estado">Estado de la Solicitud</label>
+                    <select id="solicitud_estado" class="form-control" required 
+                            [(ngModel)]="solicitud.solicitud_estado" name="solicitud_estado">
+                        <option value="">Seleccione un estado</option>
+                        <option value="en revisión">en revisión</option>
+                        <option value="aceptada">aceptada</option>
+                        <option value="denegada">denegada</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <!-- Botones de enviar y cancelar -->
+            <fieldset class="form-group">
+                <div class="col-sm-12 text-center">
+                    <button type="submit" class="btn btn-primary" [disabled]="!solicitudForm.form.valid">Guardar</button>
+                    <button type="button" class="btn btn-secondary" [routerLink]="['/solicitudes']">Cancelar</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

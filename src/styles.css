@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+.nav {
+  border-bottom: 1px solid #dee2e6; /* Línea de separación en la parte inferior */
+}
+
+.dropdown-menu {
+  margin-top: 0; /* Elimina el margen superior del menú desplegable */
+}
+
+.nav-item {
+  position: relative; /* Para el menú desplegable */
+}
+
+.dropdown-toggle::after {
+  display: none; /* Oculta la flecha de dropdown */
+}
